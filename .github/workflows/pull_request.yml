@@ -1,0 +1,46 @@
+name: Check PR
+on: [pull_request]
+
+jobs:
+  pr:
+    name: PR check
+    runs-on: [ubuntu-latest]
+    env:
+      # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
+      SLACK_CHANNEL: project-slack-channel-name
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Run LintCheck
+        shell: bash
+        run: ./gradlew lintCheck
+      - name: Run unit tests
+        shell: bash
+        run: ./gradlew --continue testDevEnterpriseUnitTest
+      - name: Danger action
+        uses: MeilCli/danger-action@v2
+        continue-on-error: true
+        with:
+          plugins_file: 'Gemfile'
+          danger_file: 'Dangerfile'
+          danger_id: 'danger-pr'
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+      - name: Slack Notification
+        if: failure()
+        uses: homoluctus/slatify@master
+        with:
+          type: "failure"
+          job_name: '*PR Check*'
+          username: GitHub
+          channel: ${{env.SLACK_CHANNEL}}
+          url: ${{ secrets.SLACK_WEB_HOOK }}
+          commit: true
+          token: ${{ secrets.GITHUB_TOKEN }}

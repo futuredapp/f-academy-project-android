@@ -15,16 +15,16 @@ private val LightColorPalette = lightColors(
     surface = pureWhite,
     onPrimary = pureWhite,
     onSecondary = pureWhite,
-    onBackground = black900,
-    onSurface = black900,
+    onBackground = ink900,
+    onSurface = ink900,
 )
 
 private val DarkColorPalette = darkColors(
     primary = orange300,
     primaryVariant = orange100,
     secondary = blue400,
-    background = black900,
-    surface = black700,
+    background = ink900,
+    surface = ink700,
     onPrimary = pureWhite,
     onSecondary = pureWhite,
     onBackground = pureWhite,

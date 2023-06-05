@@ -20,15 +20,16 @@ class HomeViewModel @Inject constructor(
         getCulturalPlacesUseCase.execute {
             onSuccess {
                 Timber.d("Cultural places: $it")
+
+                viewState.places = viewState.places.run {
+                    clear()
+                    addAll(it)
+                }
             }
             onError {
                 Timber.e(it)
             }
         }
-    }
-
-    override fun incrementCounter() {
-        viewState.counter++
     }
 
     override fun navigateToDetailScreen() {

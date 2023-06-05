@@ -10,6 +10,7 @@ object Dependencies {
     object Kotlin {
         const val gradlePlugin = "gradle-plugin"
         const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+        const val kotlinCollections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.kotlinCollections}"
     }
 
     object Compose {

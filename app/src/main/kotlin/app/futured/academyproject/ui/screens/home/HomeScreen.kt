@@ -2,22 +2,37 @@ package app.futured.academyproject.ui.screens.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import app.futured.academyproject.data.model.local.Place
 import app.futured.academyproject.navigation.NavigationDestinations
 import app.futured.academyproject.tools.arch.EventsEffect
 import app.futured.academyproject.tools.arch.onEvent
 import app.futured.academyproject.tools.compose.ScreenPreviews
 import app.futured.academyproject.ui.components.AddFloatingActionButton
+import app.futured.academyproject.ui.components.AppBar
 import app.futured.academyproject.ui.components.Showcase
+import app.futured.academyproject.ui.theme.CustomColor
+import app.futured.academyproject.ui.theme.Grid
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun HomeScreen(
@@ -37,7 +52,7 @@ fun HomeScreen(
 
         Home.Content(
             viewModel,
-            viewState.counter,
+            viewState.places,
         )
     }
 }
@@ -56,31 +71,60 @@ object Home {
     @Composable
     fun Content(
         actions: Actions,
-        counter: Int,
+        places: PersistentList<Place>,
         modifier: Modifier = Modifier,
     ) {
         Scaffold(
-            topBar = { TopAppBar(title = { Text(text = "HomeScreen") }) },
+            topBar = { AppBar(title = "Davidova Kultůromapa", onNavigationIconClick = null) },
             floatingActionButton = {
                 AddFloatingActionButton(
-                    onClick = {
-                        actions.incrementCounter()
-                    },
+                    onClick = { actions.incrementCounter() },
                 )
             },
             modifier = modifier,
         ) { contentPadding ->
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .fillMaxSize()
-                    .clickable {
-                        actions.navigateToDetailScreen()
-                    },
+            Box(
+                modifier = Modifier.padding(contentPadding),
             ) {
-                Text(text = "Home: $counter")
+                LazyColumn(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    contentPadding = PaddingValues(Grid.d4),
+                    verticalArrangement = Arrangement.spacedBy(Grid.d4),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable {
+                            actions.navigateToDetailScreen()
+                        },
+                ) {
+                    items(
+                        count = places.size,
+                    ) { index ->
+                        val place = places[index]
+
+                        Card(
+                            backgroundColor = MaterialTheme.colors.surface,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .padding(16.dp),
+                            ) {
+                                Spacer(modifier = Modifier.height(Grid.d10))
+                                Text(
+                                    text = place.name,
+                                    style = MaterialTheme.typography.h3,
+                                )
+                                Spacer(modifier = Modifier.height(Grid.d2))
+                                Text(
+                                    text = place.type,
+                                    style = MaterialTheme.typography.body1,
+                                    color = CustomColor.textSecondary,
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -92,7 +136,7 @@ fun HomeContentPreview() {
     Showcase {
         Home.Content(
             Home.PreviewActions,
-            counter = 5,
+            remember { persistentListOf() },
         )
     }
 }

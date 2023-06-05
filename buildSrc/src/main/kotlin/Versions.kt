@@ -12,6 +12,7 @@ object Versions {
 
     // kotlin
     const val kotlin = "1.8.10"
+    const val kotlinCollections = "0.3.5"
 
     const val composeVersion = "1.3.3"
     const val composeFoundationVersion = "1.3.1"

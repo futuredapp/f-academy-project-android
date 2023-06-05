@@ -1,4 +1,4 @@
-package app.futured.academyproject.data.model
+package app.futured.academyproject.data.model.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

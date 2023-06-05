@@ -1,6 +1,6 @@
 package app.futured.academyproject.data.remote
 
-import app.futured.academyproject.data.model.CulturalPlaces
+import app.futured.academyproject.data.model.api.CulturalPlaces
 import retrofit2.Response
 import retrofit2.http.GET
 

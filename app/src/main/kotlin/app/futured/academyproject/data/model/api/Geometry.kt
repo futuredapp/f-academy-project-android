@@ -1,10 +1,10 @@
-package app.futured.academyproject.data.model
+package app.futured.academyproject.data.model.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CulturalPlaces(
+data class Geometry(
     @SerialName("type") val type: String,
-    @SerialName("features") val features: List<Feature>,
+    @SerialName("coordinates") val coordinates: List<Double>,
 )

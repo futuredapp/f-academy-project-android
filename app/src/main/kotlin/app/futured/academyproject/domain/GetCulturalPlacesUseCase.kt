@@ -2,10 +2,12 @@ package app.futured.academyproject.domain
 
 import app.futured.academyproject.data.model.local.Place
 import app.futured.academyproject.data.remote.ApiManager
+import app.futured.academyproject.data.store.PlacesStore
 import app.futured.arkitekt.crusecases.UseCase
 import javax.inject.Inject
 
 class GetCulturalPlacesUseCase @Inject constructor(
+    private val placesStore: PlacesStore,
     private val apiManager: ApiManager,
 ) : UseCase<Unit, List<Place>>() {
 
@@ -31,5 +33,7 @@ class GetCulturalPlacesUseCase @Inject constructor(
                 openTo = it.properties.openTo,
                 image1Url = it.properties.image1Url,
             )
+        }.also {
+            placesStore.setPlaces(it)
         }
 }

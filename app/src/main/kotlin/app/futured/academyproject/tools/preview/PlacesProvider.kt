@@ -2,10 +2,12 @@ package app.futured.academyproject.tools.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import app.futured.academyproject.data.model.local.Place
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
-class PlacesProvider : PreviewParameterProvider<List<Place>> {
+class PlacesProvider : PreviewParameterProvider<PersistentList<Place>> {
     override val values = sequenceOf(
-        listOf(
+        persistentListOf(
             Place(
                 id = 1434,
                 name = "Národní divadlo",

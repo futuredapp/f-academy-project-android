@@ -239,7 +239,7 @@ style:
     active: false
   UnusedPrivateMember:
     active: true
-    ignoreAnnotated: ["Preview"]
+    ignoreAnnotated: ["Preview", "ScreenPreviews", "ComponentPreviews"]
   UseDataClass:
     active: true
   UtilityClassWithPublicConstructor:

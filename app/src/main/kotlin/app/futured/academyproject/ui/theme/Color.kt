@@ -13,6 +13,7 @@ val blue400 = Color(0xff415aff)
 val blue200 = Color(0xffAED5FE)
 
 val pureWhite = Color(0xffffffff)
+
 val cloud50 = Color(0xffF0F2F5)
 val cloud100 = Color(0xffDBE0E5)
 val cloud200 = Color(0xffC3CBD4)

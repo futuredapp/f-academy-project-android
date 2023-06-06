@@ -190,6 +190,7 @@ dependencies {
 
     // Other
     implementation(Dependencies.Other.timber)
+    implementation(Dependencies.Other.coil)
 
     // Testing
     testImplementation(Dependencies.Test.core)

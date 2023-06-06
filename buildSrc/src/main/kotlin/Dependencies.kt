@@ -70,6 +70,7 @@ object Dependencies {
 
     object Other {
         const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
     }
 
     object Test {

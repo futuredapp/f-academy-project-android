@@ -24,9 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
+import app.futured.academyproject.R
 import app.futured.academyproject.data.model.local.Place
 import app.futured.academyproject.navigation.NavigationDestinations
 import app.futured.academyproject.tools.Constants.Ui.GRADIENT_OVERLAY_ALPHA
@@ -80,7 +82,7 @@ object Home {
         modifier: Modifier = Modifier,
     ) {
         Scaffold(
-            topBar = { AppBar(title = "Davidova Kultůromapa", onNavigationIconClick = null) },
+            topBar = { AppBar(title = stringResource(R.string.app_map_name), onNavigationIconClick = null) },
             modifier = modifier,
         ) { contentPadding ->
             Box(

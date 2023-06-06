@@ -44,6 +44,7 @@ object Versions {
 
     // other
     const val timber = "5.0.1"
+    const val coil = "2.4.0"
 
     // taste
     const val arkitekt = "5.2.0"

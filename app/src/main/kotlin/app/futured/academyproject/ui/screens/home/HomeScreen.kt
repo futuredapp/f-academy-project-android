@@ -26,7 +26,6 @@ import app.futured.academyproject.navigation.NavigationDestinations
 import app.futured.academyproject.tools.arch.EventsEffect
 import app.futured.academyproject.tools.arch.onEvent
 import app.futured.academyproject.tools.compose.ScreenPreviews
-import app.futured.academyproject.ui.components.AddFloatingActionButton
 import app.futured.academyproject.ui.components.AppBar
 import app.futured.academyproject.ui.components.Showcase
 import app.futured.academyproject.ui.theme.CustomColor
@@ -42,11 +41,7 @@ fun HomeScreen(
     with(viewModel) {
         EventsEffect {
             onEvent<NavigateToDetailEvent> {
-                navigation.navigateToDetailScreen(
-                    title = "Demo",
-                    subtitle = "Subtitle",
-                    value = "Demo Subtitle",
-                )
+                navigation.navigateToDetailScreen(placeId = it.placeId)
             }
         }
 
@@ -60,10 +55,7 @@ fun HomeScreen(
 object Home {
 
     interface Actions {
-
-        fun navigateToDetailScreen() = Unit
-
-        fun incrementCounter() = Unit
+        fun navigateToDetailScreen(placeId: Int) = Unit
     }
 
     object PreviewActions : Actions
@@ -76,11 +68,6 @@ object Home {
     ) {
         Scaffold(
             topBar = { AppBar(title = "Davidova Kultůromapa", onNavigationIconClick = null) },
-            floatingActionButton = {
-                AddFloatingActionButton(
-                    onClick = { actions.incrementCounter() },
-                )
-            },
             modifier = modifier,
         ) { contentPadding ->
             Box(
@@ -90,41 +77,45 @@ object Home {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     contentPadding = PaddingValues(Grid.d4),
                     verticalArrangement = Arrangement.spacedBy(Grid.d4),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clickable {
-                            actions.navigateToDetailScreen()
-                        },
+                    modifier = Modifier.fillMaxSize(),
                 ) {
                     items(
                         count = places.size,
+                        key = { index -> places[index].id },
                     ) { index ->
-                        val place = places[index]
-
-                        Card(
-                            backgroundColor = MaterialTheme.colors.surface,
-                            modifier = Modifier.fillMaxWidth(),
-                        ) {
-                            Column(
-                                verticalArrangement = Arrangement.Center,
-                                modifier = Modifier
-                                    .padding(16.dp),
-                            ) {
-                                Spacer(modifier = Modifier.height(Grid.d10))
-                                Text(
-                                    text = place.name,
-                                    style = MaterialTheme.typography.h3,
-                                )
-                                Spacer(modifier = Modifier.height(Grid.d2))
-                                Text(
-                                    text = place.type,
-                                    style = MaterialTheme.typography.body1,
-                                    color = CustomColor.textSecondary,
-                                )
-                            }
-                        }
+                        PlaceCard(places[index], actions)
                     }
                 }
+            }
+        }
+    }
+
+    @Composable
+    private fun PlaceCard(place: Place, actions: Actions) {
+        Card(
+            backgroundColor = MaterialTheme.colors.surface,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    actions.navigateToDetailScreen(place.id)
+                },
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(16.dp),
+            ) {
+                Spacer(modifier = Modifier.height(Grid.d10))
+                Text(
+                    text = place.name,
+                    style = MaterialTheme.typography.h3,
+                )
+                Spacer(modifier = Modifier.height(Grid.d2))
+                Text(
+                    text = place.type,
+                    style = MaterialTheme.typography.body1,
+                    color = CustomColor.textSecondary,
+                )
             }
         }
     }

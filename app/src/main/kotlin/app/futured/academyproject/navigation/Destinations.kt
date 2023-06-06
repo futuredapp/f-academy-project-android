@@ -2,14 +2,15 @@ package app.futured.academyproject.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
-import androidx.navigation.navArgument
-import androidx.navigation.NavType
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
+import androidx.navigation.navArgument
+import app.futured.academyproject.tools.Constants.Args.PLACE_ID
 
 typealias DestinationArgumentKey = String
 typealias DestinationArgumentValue = String
@@ -21,25 +22,15 @@ sealed class Destination(
 ) {
     object Home : Destination(route = "home")
     object Detail : Destination(
-        route = "detail/{title}?subtitle={subtitle}?value={value}",
+        route = "detail/{$PLACE_ID}",
         arguments = listOf(
-            navArgument("title") {
-                type = NavType.StringType
-            },
-            navArgument("subtitle") {
-                type = NavType.StringType
-                defaultValue = "Default subtitle"
-            },
-            navArgument("value") {
-                type = NavType.StringType
-                nullable = true
+            navArgument(PLACE_ID) {
+                type = NavType.IntType
             },
         ),
     ) {
-        fun buildRoute(title: String, subtitle: String?, value: String?): String = route
-            .withArgument("title", title)
-            .withArgument("subtitle", subtitle)
-            .withArgument("value", value)
+        fun buildRoute(placeId: Int): String = route
+            .withArgument(PLACE_ID, placeId.toString())
     }
 }
 

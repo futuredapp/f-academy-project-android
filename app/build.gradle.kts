@@ -196,6 +196,11 @@ dependencies {
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockk)
 
+    androidTestImplementation(Dependencies.Test.core)
+    androidTestImplementation(Dependencies.Test.runner)
+    androidTestImplementation(Dependencies.Test.junit)
+    androidTestImplementation(Dependencies.Test.mockk)
+
     // Lint
     lintChecks(Dependencies.Lint.composeLint)
 }

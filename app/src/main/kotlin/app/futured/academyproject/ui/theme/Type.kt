@@ -9,25 +9,30 @@ import androidx.compose.ui.unit.sp
 val typography = Typography(
     h1 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
         fontSize = 28.sp,
         letterSpacing = (-1.5).sp,
     ),
     h2 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
-        fontSize = 24.sp,
+        fontSize = 22.sp,
         letterSpacing = (-0.5).sp,
     ),
     h3 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
+        fontSize = 18.sp,
         letterSpacing = 0.sp,
     ),
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
+    ),
+    body2 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
     ),
 )

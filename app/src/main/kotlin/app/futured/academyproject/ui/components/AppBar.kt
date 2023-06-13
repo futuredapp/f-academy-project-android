@@ -16,17 +16,20 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.futured.academyproject.tools.compose.ComponentPreviews
+import app.futured.academyproject.ui.theme.CustomColor
 
 @Composable
 fun AppBar(
     title: String,
     modifier: Modifier = Modifier,
     navModifier: Modifier = Modifier,
+    alpha: Float = 1f,
     onNavigationIconClick: (() -> Unit)? = null,
     navIcon: @Composable () -> Unit = { Icon(imageVector = Icons.Filled.ArrowBack, "") },
     actions: @Composable (RowScope.() -> Unit) = { },
@@ -41,12 +44,12 @@ fun AppBar(
                     textAlign = TextAlign.Start,
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.h2,
+                    style = MaterialTheme.typography.h3,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
             },
-            modifier = modifier,
+            modifier = modifier.alpha(alpha),
             navigationIcon = onNavigationIconClick?.let {
                 {
                     IconButton(onClick = it, modifier = navModifier) {
@@ -61,7 +64,7 @@ fun AppBar(
         if (showDivider) {
             Divider(
                 modifier = Modifier.align(Alignment.BottomCenter),
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+                color = CustomColor.divider.copy(alpha = alpha),
             )
         }
     }

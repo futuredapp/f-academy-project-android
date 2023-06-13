@@ -13,6 +13,6 @@ interface Constants {
 
     object Ui {
         const val PLACE_CARD_ASPECT_RATIO = 1.7f
-        const val GRADIENT_OVERLAY_ALPHA = 0.7f
+        const val GRADIENT_OVERLAY_ALPHA = 0.8f
     }
 }

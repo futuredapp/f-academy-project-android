@@ -26,6 +26,7 @@ object Versions {
     const val constraintLayout = "1.0.1"
     const val vectorDrawable = "1.2.0-beta01"
     const val preference = "1.2.0"
+    const val collapsingToolbar = "2.3.3"
 
     const val activity = "1.6.1"
     const val desugarLibs = "2.0.2"

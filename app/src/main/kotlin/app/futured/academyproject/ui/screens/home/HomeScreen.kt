@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,15 +17,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,12 +37,12 @@ import app.futured.academyproject.tools.arch.EventsEffect
 import app.futured.academyproject.tools.arch.onEvent
 import app.futured.academyproject.tools.compose.ScreenPreviews
 import app.futured.academyproject.tools.preview.PlacesProvider
-import app.futured.academyproject.ui.components.AppBar
+import app.futured.academyproject.ui.components.CollapsingScaffold
+import app.futured.academyproject.ui.components.CollapsingToolbar
 import app.futured.academyproject.ui.components.Showcase
 import app.futured.academyproject.ui.theme.Grid
-import app.futured.academyproject.ui.theme.cloud200
+import app.futured.academyproject.ui.theme.cloud100
 import app.futured.academyproject.ui.theme.cloud50
-import app.futured.academyproject.ui.theme.ink600
 import app.futured.academyproject.ui.theme.ink900
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -81,25 +81,23 @@ object Home {
         places: PersistentList<Place>,
         modifier: Modifier = Modifier,
     ) {
-        Scaffold(
-            topBar = { AppBar(title = stringResource(R.string.app_map_name), onNavigationIconClick = null) },
-            modifier = modifier,
-        ) { contentPadding ->
-            Box(
-                modifier = Modifier.padding(contentPadding),
+        CollapsingScaffold(
+            modifier = modifier.fillMaxSize(),
+            toolbar = { state ->
+                CollapsingToolbar(state, titleRes = R.string.app_map_name, onNavigationIconClick = null)
+            },
+        ) {
+            LazyColumn(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                contentPadding = PaddingValues(Grid.d4),
+                verticalArrangement = Arrangement.spacedBy(Grid.d4),
+                modifier = Modifier.fillMaxSize(),
             ) {
-                LazyColumn(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = PaddingValues(Grid.d4),
-                    verticalArrangement = Arrangement.spacedBy(Grid.d4),
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    items(
-                        count = places.size,
-                        key = { index -> places[index].id },
-                    ) { index ->
-                        PlaceCard(places[index], actions)
-                    }
+                items(
+                    count = places.size,
+                    key = { index -> places[index].id },
+                ) { index ->
+                    PlaceCard(places[index], actions)
                 }
             }
         }
@@ -108,10 +106,11 @@ object Home {
     @Composable
     private fun PlaceCard(place: Place, actions: Actions) {
         Card(
-            backgroundColor = ink600,
+            backgroundColor = MaterialTheme.colors.surface,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(PLACE_CARD_ASPECT_RATIO)
+                .clip(MaterialTheme.shapes.medium)
                 .clickable {
                     actions.navigateToDetailScreen(place.id)
                 },
@@ -133,7 +132,8 @@ object Home {
                 Box(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
-                        .fillMaxSize()
+                        .fillMaxWidth()
+                        .fillMaxHeight()
                         .background(
                             Brush.verticalGradient(
                                 0f to ink900.copy(alpha = 0f),
@@ -151,16 +151,16 @@ object Home {
                 ) {
                     Text(
                         text = place.name,
-                        style = MaterialTheme.typography.h3,
+                        style = MaterialTheme.typography.h2,
                         color = cloud50,
-                        maxLines = 1,
+                        maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                     )
-                    Spacer(modifier = Modifier.height(Grid.d2))
+                    Spacer(modifier = Modifier.height(Grid.d1))
                     Text(
-                        text = place.type,
-                        style = MaterialTheme.typography.body1,
-                        color = cloud200,
+                        text = place.type.uppercase(),
+                        style = MaterialTheme.typography.body2,
+                        color = cloud100,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )

@@ -25,7 +25,7 @@ val ink700 = Color(0xff1C1F22)
 val ink600 = Color(0xff222428)
 
 object CustomColor {
-    val textSecondary: Color
+    val divider: Color
         @Composable
-        get() = if (isSystemInDarkTheme()) cloud300 else ink600
+        get() = if (isSystemInDarkTheme()) ink800 else cloud100
 }

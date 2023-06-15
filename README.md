@@ -8,7 +8,7 @@
 ## Project info
 
 - Deadline: ~~**--. --. ----**~~
-- ApplicationId: ~~`app.futured.project`~~
+- ApplicationId: `app.futured.academyproject.`
 - Supports: ~~**Dark mode, landscape orientation**~~
 - Design: ~~Figma/Zeplin (add link)~~
 - ~~Backend: Apiary (add link)~~

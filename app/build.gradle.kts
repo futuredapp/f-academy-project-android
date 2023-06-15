@@ -159,7 +159,7 @@ dependencies {
     implementation(Dependencies.Compose.animation)
     implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.foundation_layout)
-    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.material_icons_extended)
     implementation(Dependencies.Compose.runtime_livedata)
     implementation(Dependencies.Compose.runtime)
@@ -167,7 +167,6 @@ dependencies {
     implementation(Dependencies.Compose.ui_tooling)
     implementation(Dependencies.Compose.activity)
     implementation(Dependencies.Compose.constraintLayout)
-    implementation(Dependencies.Compose.collapsingToolbar)
 
     // MVVM
     implementation(Dependencies.Taste.mvvmCrInteractors)

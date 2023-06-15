@@ -18,6 +18,7 @@ object Dependencies {
         const val foundation = "androidx.compose.foundation:foundation:${Versions.composeFoundationVersion}"
         const val foundation_layout = "androidx.compose.foundation:foundation-layout:${Versions.composeFoundationVersion}"
         const val material = "androidx.compose.material:material:${Versions.composeMaterialVersion}"
+        const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
         const val material_icons_extended = "androidx.compose.material:material-icons-extended:${Versions.composeMaterialVersion}"
         const val runtime_livedata = "androidx.compose.runtime:runtime-livedata:${Versions.composeVersion}"
         const val runtime = "androidx.compose.runtime:runtime:${Versions.composeVersion}"
@@ -25,7 +26,6 @@ object Dependencies {
         const val ui_tooling = "androidx.compose.ui:ui-tooling:${Versions.composeVersion}"
         const val activity = "androidx.activity:activity-compose:${Versions.activity}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayout}"
-        const val collapsingToolbar = "me.onebone:toolbar-compose:${Versions.collapsingToolbar}"
     }
 
     object Support {

@@ -4,15 +4,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import app.futured.academyproject.tools.compose.ComponentPreviews
 import app.futured.academyproject.ui.theme.CustomColor
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppBar(
     title: String,
@@ -34,7 +37,7 @@ fun AppBar(
     navIcon: @Composable () -> Unit = { Icon(imageVector = Icons.Filled.ArrowBack, "") },
     actions: @Composable (RowScope.() -> Unit) = { },
     showDivider: Boolean = false,
-    background: Color = MaterialTheme.colors.surface,
+    background: Color = MaterialTheme.colorScheme.surface,
 ) {
     Box {
         TopAppBar(
@@ -43,8 +46,8 @@ fun AppBar(
                     text = title,
                     textAlign = TextAlign.Start,
                     modifier = Modifier.fillMaxWidth(),
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.h3,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleSmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -56,8 +59,8 @@ fun AppBar(
                         navIcon()
                     }
                 }
-            },
-            backgroundColor = background,
+            } ?: {},
+            colors = TopAppBarDefaults.topAppBarColors(),
             actions = actions,
         )
 

@@ -17,6 +17,7 @@ object Versions {
     const val composeVersion = "1.3.3"
     const val composeFoundationVersion = "1.3.1"
     const val composeMaterialVersion = "1.3.1"
+    const val composeMaterial3Version = "1.1.0"
     const val composeCompilerVersion = "1.4.2"
 
     // support
@@ -26,7 +27,6 @@ object Versions {
     const val constraintLayout = "1.0.1"
     const val vectorDrawable = "1.2.0-beta01"
     const val preference = "1.2.0"
-    const val collapsingToolbar = "2.3.3"
 
     const val activity = "1.6.1"
     const val desugarLibs = "2.0.2"

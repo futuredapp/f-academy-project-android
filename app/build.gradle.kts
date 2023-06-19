@@ -152,6 +152,7 @@ dependencies {
     implementation(Dependencies.Support.lifecycleRuntime)
     implementation(Dependencies.Support.activityKtx)
     implementation(Dependencies.Support.lifecycleCompiler)
+    implementation(Dependencies.Support.preference)
     coreLibraryDesugaring(Dependencies.Support.desugarLibs)
 
     // Compose

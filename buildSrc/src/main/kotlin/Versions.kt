@@ -25,14 +25,13 @@ object Versions {
     const val appcompat = "1.6.1"
     const val lifecycle = "2.5.1"
     const val constraintLayout = "1.0.1"
-    const val vectorDrawable = "1.2.0-beta01"
     const val preference = "1.2.0"
 
     const val activity = "1.6.1"
     const val desugarLibs = "2.0.2"
 
     // navigation components
-    const val navigation = "2.5.3"
+    const val navigation = "2.6.0"
     const val hiltNavigation = "1.0.0"
 
     // networking
@@ -40,8 +39,8 @@ object Versions {
     const val retrofit = "2.9.0"
 
     // serialization
-    const val serializationJson = "1.4.1"
-    const val serializationConverter = "0.8.0"
+    const val serializationJson = "1.5.1"
+    const val serializationConverter = "1.0.0"
 
     // other
     const val timber = "5.0.1"

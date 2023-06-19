@@ -1,6 +1,7 @@
 package app.futured.academyproject.injection.modules
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import app.futured.academyproject.tools.serialization.ZonedDateTimeSerializer
@@ -31,6 +32,6 @@ class ApplicationModule {
     }
 
     @Provides
-    fun sharedPrefs(@ApplicationContext context: Context) =
+    fun sharedPrefs(@ApplicationContext context: Context): SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)
 }

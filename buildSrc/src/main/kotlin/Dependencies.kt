@@ -34,13 +34,9 @@ object Dependencies {
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
         const val activityKtx = "androidx.activity:activity-ktx:${Versions.activity}"
-
+        const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
         const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
         const val desugarLibs = "com.android.tools:desugar_jdk_libs:${Versions.desugarLibs}"
-
-        // Questionable
-        const val vectordrawable = "androidx.vectordrawable:vectordrawable:${Versions.vectorDrawable}"
-        const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
     }
 
     object NavigationComponents {

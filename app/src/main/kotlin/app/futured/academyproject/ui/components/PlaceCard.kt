@@ -21,10 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import app.futured.academyproject.data.model.local.Place
+import app.futured.academyproject.tools.preview.PlacesProvider
 import app.futured.academyproject.ui.theme.Grid
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import kotlinx.collections.immutable.PersistentList
 
 @Composable
 fun PlaceCard(place: Place, onClick: (Int) -> Unit, modifier: Modifier = Modifier) {
@@ -77,4 +81,10 @@ fun PlaceCard(place: Place, onClick: (Int) -> Unit, modifier: Modifier = Modifie
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun PlaceCardPreview(@PreviewParameter(PlacesProvider::class) places: PersistentList<Place>) = Showcase {
+    PlaceCard(place = places.first(), onClick = {})
 }

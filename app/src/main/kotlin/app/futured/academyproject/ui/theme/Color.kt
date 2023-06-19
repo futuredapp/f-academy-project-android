@@ -2,25 +2,7 @@
 
 package app.futured.academyproject.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-
-val cloud50 = Color(0xffF0F2F5)
-val cloud100 = Color(0xffDBE0E5)
-val cloud200 = Color(0xffC3CBD4)
-val cloud300 = Color(0xffAAB6C3)
-
-val ink900 = Color(0xff0D0F11)
-val ink800 = Color(0xff17191C)
-val ink700 = Color(0xff1C1F22)
-val ink600 = Color(0xff222428)
-
-object CustomColor {
-    val divider: Color
-        @Composable
-        get() = if (isSystemInDarkTheme()) ink800 else cloud100
-}
 
 val md_theme_light_primary = Color(0xFF7B5800)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
@@ -82,4 +64,5 @@ val md_theme_dark_onSurface = Color(0xFFCDC5BD)
 val md_theme_dark_surfaceVariant = Color(0xFF4E4539)
 val md_theme_dark_onSurfaceVariant = Color(0xFFD2C4B4)
 
+// seed color from Material Theme Builder
 val seed = Color(0xFFCFA85F)

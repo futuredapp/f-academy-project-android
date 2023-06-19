@@ -11,10 +11,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -80,8 +82,9 @@ object Home {
                 LazyColumn(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     contentPadding = innerPadding,
-                    verticalArrangement = Arrangement.spacedBy(Grid.d4),
-                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(Grid.d1),
+                    modifier = Modifier
+                        .fillMaxSize(),
                 ) {
                     items(
                         count = places.size,
@@ -90,7 +93,6 @@ object Home {
                         PlaceCard(
                             place = places[index],
                             onClick = actions::navigateToDetailScreen,
-                            modifier = Modifier.padding(horizontal = Grid.d4)
                         )
                     }
                 }
@@ -125,6 +127,10 @@ object Home {
                     )
                 }
             },
+            colors = TopAppBarDefaults.largeTopAppBarColors(
+                containerColor = MaterialTheme.colorScheme.background,
+                scrolledContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(Grid.d1),
+            ),
             scrollBehavior = scrollBehavior,
         )
     }

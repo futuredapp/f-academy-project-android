@@ -4,4 +4,4 @@ import app.futured.arkitekt.core.event.Event
 
 sealed class HomeEvents : Event<HomeViewState>()
 
-object NavigateToDetailEvent : HomeEvents()
+data class NavigateToDetailEvent(val placeId: Int) : HomeEvents()

@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    override fun navigateToDetailScreen() {
-        sendEvent(NavigateToDetailEvent)
+    override fun navigateToDetailScreen(placeId: Int) {
+        sendEvent(NavigateToDetailEvent(placeId))
     }
 }

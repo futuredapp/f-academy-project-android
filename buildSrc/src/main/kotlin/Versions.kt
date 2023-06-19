@@ -12,6 +12,7 @@ object Versions {
 
     // kotlin
     const val kotlin = "1.8.10"
+    const val kotlinCollections = "0.3.5"
 
     const val composeVersion = "1.3.3"
     const val composeFoundationVersion = "1.3.1"
@@ -43,6 +44,7 @@ object Versions {
 
     // other
     const val timber = "5.0.1"
+    const val coil = "2.4.0"
 
     // taste
     const val arkitekt = "5.2.0"

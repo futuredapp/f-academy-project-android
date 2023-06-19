@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Android Project Template</string>
+    <string name="app_name">Futured Dev Academy</string>
+
+    <string name="error_connection">Zkontrolujte prosím jestli jste připojeni k internetu. Protože možná nejste.</string>
+    <string name="error_parse">Něco se pokazilo. Zkuste to později.</string>
+    <string name="error_general_server_error">Něco se pokazilo a ne na vašem přijímači. Zkuste to později.</string>
+    <string name="error_unauthorized">Nejste přihlášení a to byste měli.</string>
 </resources>

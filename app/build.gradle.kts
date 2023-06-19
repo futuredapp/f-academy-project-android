@@ -141,6 +141,7 @@ kotlin {
 dependencies {
     // Kotlin
     implementation(platform(Dependencies.Kotlin.kotlinReflect))
+    implementation(Dependencies.Kotlin.kotlinCollections)
 
     // Support
     implementation(Dependencies.Support.appcompat)
@@ -189,6 +190,7 @@ dependencies {
 
     // Other
     implementation(Dependencies.Other.timber)
+    implementation(Dependencies.Other.coil)
 
     // Testing
     testImplementation(Dependencies.Test.core)

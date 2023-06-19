@@ -14,11 +14,11 @@ object Versions {
     const val kotlin = "1.8.10"
     const val kotlinCollections = "0.3.5"
 
-    const val composeVersion = "1.3.3"
+    const val composeVersion = "1.4.3"
     const val composeFoundationVersion = "1.3.1"
     const val composeMaterialVersion = "1.3.1"
-    const val composeMaterial3Version = "1.1.0"
-    const val composeCompilerVersion = "1.4.2"
+    const val composeMaterial3Version = "1.2.0-alpha02"
+    const val composeCompilerVersion = "1.4.7"
 
     // support
     const val androidx = "1.9.0"

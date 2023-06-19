@@ -2,8 +2,8 @@ package app.futured.academyproject.ui.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
@@ -86,12 +86,9 @@ object Home {
                     modifier = Modifier
                         .fillMaxSize(),
                 ) {
-                    items(
-                        count = places.size,
-                        key = { index -> places[index].id },
-                    ) { index ->
+                    items(places) { place ->
                         PlaceCard(
-                            place = places[index],
+                            place = place,
                             onClick = actions::navigateToDetailScreen,
                         )
                     }
@@ -107,7 +104,7 @@ object Home {
             title = {
                 Text(
                     stringResource(R.string.app_map_name),
-                    maxLines = 2,
+                    maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
             },

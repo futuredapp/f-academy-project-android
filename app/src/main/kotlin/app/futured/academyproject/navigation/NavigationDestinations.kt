@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 
 interface NavigationDestinations {
     fun popBackStack()
-    fun navigateToDetailScreen(title: String, subtitle: String? = null, value: String? = null)
+    fun navigateToDetailScreen(placeId: Int)
 }
 
 /**
@@ -16,6 +16,6 @@ class NavigationDestinationsImpl(private val navController: NavController) : Nav
         navController.popBackStack()
     }
 
-    override fun navigateToDetailScreen(title: String, subtitle: String?, value: String?) =
-        navController.navigate(Destination.Detail.buildRoute(title, subtitle, value))
+    override fun navigateToDetailScreen(placeId: Int) =
+        navController.navigate(Destination.Detail.buildRoute(placeId))
 }

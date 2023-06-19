@@ -1,7 +1,5 @@
 package app.futured.academyproject.ui.screens.detail
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,11 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import app.futured.academyproject.data.model.local.Place
 import app.futured.academyproject.navigation.NavigationDestinations
 import app.futured.academyproject.tools.arch.EventsEffect
 import app.futured.academyproject.tools.arch.onEvent
 import app.futured.academyproject.tools.compose.ScreenPreviews
-import app.futured.academyproject.ui.components.AddFloatingActionButton
 import app.futured.academyproject.ui.components.Showcase
 
 @Composable
@@ -37,7 +35,7 @@ fun DetailScreen(
 
         Detail.Content(
             this,
-            viewState.counter,
+            viewState.place,
         )
     }
 }
@@ -46,16 +44,14 @@ object Detail {
 
     interface Actions {
         fun navigateBack() = Unit
-        fun incrementCounter() = Unit
     }
 
     object PreviewActions : Actions
 
-    @SuppressLint("ComposeModifierMissing")
     @Composable
     fun Content(
         actions: Actions,
-        counter: Int,
+        place: Place?,
         modifier: Modifier = Modifier,
     ) {
         Scaffold(
@@ -71,23 +67,17 @@ object Detail {
                     },
                 )
             },
-            floatingActionButton = {
-                AddFloatingActionButton(
-                    onClick = {
-                        actions.incrementCounter()
-                    },
-                )
-            },
             modifier = modifier,
         ) { contentPadding ->
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .fillMaxSize(),
-            ) {
-                Text(text = "Detail: $counter")
+            place?.let {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .padding(contentPadding)
+                        .fillMaxSize(),
+                ) {
+                    Text(text = place.name)
+                }
             }
         }
     }
@@ -99,7 +89,7 @@ fun DetailContentPreview() {
     Showcase {
         Detail.Content(
             Detail.PreviewActions,
-            counter = 5,
+            place = null,
         )
     }
 }

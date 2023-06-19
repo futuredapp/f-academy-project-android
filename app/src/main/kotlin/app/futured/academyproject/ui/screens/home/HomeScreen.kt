@@ -24,9 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
+import app.futured.academyproject.R
 import app.futured.academyproject.data.model.local.Place
 import app.futured.academyproject.navigation.NavigationDestinations
 import app.futured.academyproject.tools.Constants.Ui.GRADIENT_OVERLAY_ALPHA
@@ -54,11 +56,7 @@ fun HomeScreen(
     with(viewModel) {
         EventsEffect {
             onEvent<NavigateToDetailEvent> {
-                navigation.navigateToDetailScreen(
-                    title = "Demo",
-                    subtitle = "Subtitle",
-                    value = "Demo Subtitle",
-                )
+                navigation.navigateToDetailScreen(placeId = it.placeId)
             }
         }
 
@@ -72,10 +70,7 @@ fun HomeScreen(
 object Home {
 
     interface Actions {
-
-        fun navigateToDetailScreen() = Unit
-
-        fun incrementCounter() = Unit
+        fun navigateToDetailScreen(placeId: Int) = Unit
     }
 
     object PreviewActions : Actions
@@ -87,7 +82,7 @@ object Home {
         modifier: Modifier = Modifier,
     ) {
         Scaffold(
-            topBar = { AppBar(title = "Davidova Kultůromapa", onNavigationIconClick = null) },
+            topBar = { AppBar(title = stringResource(R.string.app_map_name), onNavigationIconClick = null) },
             modifier = modifier,
         ) { contentPadding ->
             Box(
@@ -118,7 +113,7 @@ object Home {
                 .fillMaxWidth()
                 .aspectRatio(PLACE_CARD_ASPECT_RATIO)
                 .clickable {
-                    actions.navigateToDetailScreen()
+                    actions.navigateToDetailScreen(place.id)
                 },
         ) {
             Box {

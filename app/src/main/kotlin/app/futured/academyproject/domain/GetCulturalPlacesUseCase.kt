@@ -1,16 +1,19 @@
 package app.futured.academyproject.domain
 
 import app.futured.academyproject.data.model.local.Place
-import app.futured.academyproject.data.remote.ApiManager
 import app.futured.academyproject.data.store.PlacesStore
 import app.futured.arkitekt.crusecases.UseCase
 import javax.inject.Inject
 
 class GetCulturalPlacesUseCase @Inject constructor(
     private val placesStore: PlacesStore,
-    private val apiManager: ApiManager,
 ) : UseCase<Unit, List<Place>>() {
 
+    override suspend fun build(args: Unit): List<Place> =
+        placesStore.getPlaces() ?: throw IllegalArgumentException("Places not found")
+
+    /*
+    TODO: For lecture: "API and data" - remove for previous ones
     override suspend fun build(args: Unit): List<Place> =
         apiManager.getCulturalPlaces().features.map {
             Place(
@@ -36,4 +39,5 @@ class GetCulturalPlacesUseCase @Inject constructor(
         }.also {
             placesStore.setPlaces(it)
         }
+     */
 }

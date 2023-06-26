@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -150,16 +152,14 @@ dependencies {
     implementation(Dependencies.Support.lifecycleRuntime)
     implementation(Dependencies.Support.activityKtx)
     implementation(Dependencies.Support.lifecycleCompiler)
-    coreLibraryDesugaring(Dependencies.Support.desugarLibs)
-
-    implementation(Dependencies.Support.vectordrawable)
     implementation(Dependencies.Support.preference)
+    coreLibraryDesugaring(Dependencies.Support.desugarLibs)
 
     // Compose
     implementation(Dependencies.Compose.animation)
     implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.foundation_layout)
-    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.material_icons_extended)
     implementation(Dependencies.Compose.runtime_livedata)
     implementation(Dependencies.Compose.runtime)

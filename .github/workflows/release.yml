@@ -9,12 +9,9 @@ jobs:
     name: Release build
     runs-on: [ubuntu-latest]
     env:
-      # TODO AppCenter application name, eg. "futured/Gastromapa"
-      APPCENTER_APP_NAME: futured/app-name
+      APPCENTER_APP_NAME: futured/Futured-Dev-Academy
       APPCENTER_GROUPS: Release
       EXCLUDE_APK_FILTER: .*unaligned.apk\|.*Test.*.apk
-      # TODO Platform-specific slack channel name for notifications, eg. "gmlh-android"
-      SLACK_CHANNEL: project-slack-channel-name
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -47,14 +44,3 @@ jobs:
           file: ${{steps.artifacts.outputs.apk_file}}
           releaseNotes: ${{ github.event.release.body }}
           notifyTesters: false
-      - name: Slack Notification
-        if: failure()
-        uses: homoluctus/slatify@master
-        with:
-          type: "failure"
-          job_name: '*Release build*'
-          username: GitHub
-          channel: ${{env.SLACK_CHANNEL}}
-          url: ${{secrets.SLACK_WEB_HOOK}}
-          commit: true
-          token: ${{secrets.GITHUB_TOKEN}}

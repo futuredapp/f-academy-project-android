@@ -1,17 +1,19 @@
-# ~~Project name~~ (Android)
+# Futured Dev Academy (Android)
 
-![minSdk](https://img.shields.io/badge/minSdk-21-brightgreen.svg?style=flat) ![targetSdk](https://img.shields.io/badge/targetSdk-33-brightgreen.svg?style=flat) ![Bitrise](https://img.shields.io/bitrise/appid.svg?token=apptoken) 
+![minSdk](https://img.shields.io/badge/minSdk-21-brightgreen.svg?style=flat) ![targetSdk](https://img.shields.io/badge/targetSdk-33-brightgreen.svg?style=flat)
 
 
-~~Short project description.~~
+Miniproject used to learn basics of Android development. Contains basic setup of project, Jetpack Compose, MVVM architecture, REST API etc.
+
+Made by [Futured](https://futured.app). 
 
 ## Project info
 
 - Deadline: ~~**--. --. ----**~~
 - ApplicationId: `app.futured.academyproject.`
-- Supports: ~~**Dark mode, landscape orientation**~~
+- Supports: **Dark mode, landscape orientation**
 - Design: ~~Figma/Zeplin (add link)~~
-- ~~Backend: Apiary (add link)~~
+- Backend: [Mapový portál města Brna](https://gis.brno.cz)
   - ~~Prod: https://live.app.com~~
   - ~~Staging: https://staging.app.com~~
 - Interactors: Kotlin Coroutines
@@ -37,8 +39,6 @@
 ### Security standard
 
 This project complies with ~~Standard (F0), High (F1), Highest (F2)~~ security standard.
-
-~~[Project specific standard](www.notion.so)~~
 
 ### Additional Scripts
 

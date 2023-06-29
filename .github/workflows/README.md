@@ -4,8 +4,7 @@
 in organization level secrets, you just have to grant access to particular app:
 
 1. `DANGER_GITHUB_API_TOKEN`
-2. `SLACK_WEB_HOOK`
-3. `APPCENTER_API_TOKEN`
+2. `APPCENTER_API_TOKEN`
 
 ### 2. Configure workflow .yml files
 

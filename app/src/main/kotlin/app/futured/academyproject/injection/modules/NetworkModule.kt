@@ -47,11 +47,10 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    @OptIn(ExperimentalSerializationApi::class)
     fun provideRetrofitService(
         okHttpClient: OkHttpClient,
         json: Json,
-    ) = Retrofit.Builder()
+    ): ApiService = Retrofit.Builder()
         .baseUrl(BASE_PROD_URL)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .client(okHttpClient)

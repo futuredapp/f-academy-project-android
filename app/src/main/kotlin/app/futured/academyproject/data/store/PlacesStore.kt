@@ -10,7 +10,6 @@ import javax.inject.Singleton
 @Singleton
 class PlacesStore @Inject constructor() {
 
-    //TODO: Mock data for lectures before: "API and data"
     private val places = MutableStateFlow<List<Place>?>(PlacesProvider().values.first())
 
     suspend fun setPlaces(places: List<Place>) {

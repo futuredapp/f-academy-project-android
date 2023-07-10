@@ -3,7 +3,6 @@ package app.futured.academyproject.ui.screens.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
@@ -32,7 +31,6 @@ import app.futured.academyproject.tools.arch.EventsEffect
 import app.futured.academyproject.tools.arch.onEvent
 import app.futured.academyproject.tools.compose.ScreenPreviews
 import app.futured.academyproject.tools.preview.PlacesProvider
-import app.futured.academyproject.ui.components.PlaceCard
 import app.futured.academyproject.ui.components.Showcase
 import app.futured.academyproject.ui.theme.Grid
 import kotlinx.collections.immutable.PersistentList
@@ -86,12 +84,7 @@ object Home {
                     modifier = Modifier
                         .fillMaxSize(),
                 ) {
-                    items(places) { place ->
-                        PlaceCard(
-                            place = place,
-                            onClick = actions::navigateToDetailScreen,
-                        )
-                    }
+                    // such empty
                 }
             },
         )

@@ -7,11 +7,6 @@ jobs:
   enterprise:
     name: Enterprise build
     runs-on: [ubuntu-latest]
-    env:
-      APPCENTER_APP_NAME: futured/Futured-Dev-Academy
-      # Add additional AppCenter user groups separated by semicolon, if applicable, eg. "Collaborators;Partners"
-      APPCENTER_GROUPS: Collaborators
-      EXCLUDE_APK_FILTER: .*unaligned.apk\|.*Test.*.apk
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -28,19 +23,3 @@ jobs:
       - name: Run unit tests
         shell: bash
         run: ./gradlew --continue testDevEnterpriseUnitTest
-      - name: Find artifacts and mapping file
-        shell: bash
-        run: |
-          echo ::set-output name=apk_file::$(find . -name "*.apk" | grep -v ${{env.EXCLUDE_APK_FILTER}})
-          echo ::set-output name=aab_file::$(find . -name "*.aab")
-          echo ::set-output name=mapping_file::$(find . -name mapping.txt)
-        id: artifacts
-      - name: Publish to App Center
-        uses: wzieba/AppCenter-Github-Action@v1.3.2
-        with:
-          appName: ${{env.APPCENTER_APP_NAME}}
-          token: ${{secrets.APPCENTER_API_TOKEN}}
-          group: ${{env.APPCENTER_GROUPS}}
-          file: ${{steps.artifacts.outputs.apk_file}}
-          releaseNotes: ${{ github.event.head_commit.message }}
-          notifyTesters: false

@@ -29,10 +29,10 @@
 -keepclasseswithmembers class kotlinx.serialization.json.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
--keep,includedescriptorclasses class app.futured.androidprojecttemplate.**$$serializer { *; } # TODO - change package name to your app's
--keepclassmembers class app.futured.androidprojecttemplate.** { # TODO - change package name to your app's
+-keep,includedescriptorclasses class app.futured.androidprojecttemplate.**$$serializer { *; }
+-keepclassmembers class app.futured.androidprojecttemplate.** {
     *** Companion;
 }
--keepclasseswithmembers class app.futured.androidprojecttemplate.** { # TODO - change package name to your app's
+-keepclasseswithmembers class app.futured.androidprojecttemplate.** {
     kotlinx.serialization.KSerializer serializer(...);
 }

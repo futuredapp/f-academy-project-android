@@ -14,7 +14,7 @@ Prepared by [Futured](https://futured.app) ♥️
 - David Kočnar, Android dev, <david.kocnar@futured.app>
 
 ### Future Graduate:
-- ~~Jan Novak, <jan.novak@notsofutured.app>~~
+- Petr Kadlec, <p1kadlec@gmail.com>
 
 
 ---

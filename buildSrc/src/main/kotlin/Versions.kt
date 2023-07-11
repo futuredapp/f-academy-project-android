@@ -3,7 +3,7 @@
 object Versions {
 
     // gradle
-    const val androidGradlePlugin = "7.4.1"
+    const val androidGradlePlugin = "8.0.2"
 
     // plugins
     const val detekt = "1.22.0"

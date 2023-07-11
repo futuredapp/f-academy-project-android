@@ -42,6 +42,7 @@ android.apply {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     compileOptions {

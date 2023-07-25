@@ -73,6 +73,7 @@ object Dependencies {
         const val runner = "androidx.test:runner:${Versions.testRunner}"
         const val junit = "androidx.test.ext:junit-ktx:${Versions.junit}"
         const val mockk = "io.mockk:mockk:${Versions.mockk}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     }
 
     object Lint {

@@ -13,6 +13,7 @@ object Versions {
     // kotlin
     const val kotlin = "1.8.21"
     const val kotlinCollections = "0.3.5"
+    const val coroutines = "1.6.4"
 
     // compose
     const val composeVersion = "1.4.3"

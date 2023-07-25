@@ -196,6 +196,7 @@ dependencies {
     testImplementation(Dependencies.Test.runner)
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockk)
+    testImplementation(Dependencies.Test.coroutines)
 
     androidTestImplementation(Dependencies.Test.core)
     androidTestImplementation(Dependencies.Test.runner)

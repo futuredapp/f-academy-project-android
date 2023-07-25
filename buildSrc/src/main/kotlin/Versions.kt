@@ -17,7 +17,6 @@ object Versions {
     // compose
     const val composeVersion = "1.4.3"
     const val composeMaterialVersion = "1.4.3"
-    const val composeMaterial3Version = "1.2.0-alpha02"
     const val composeCompilerVersion = "1.4.7"
 
     // support

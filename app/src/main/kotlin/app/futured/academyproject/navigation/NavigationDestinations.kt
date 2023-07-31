@@ -16,6 +16,5 @@ class NavigationDestinationsImpl(private val navController: NavController) : Nav
         navController.popBackStack()
     }
 
-    override fun navigateToDetailScreen(placeId: Int) =
-        navController.navigate(Destination.Detail.buildRoute(placeId))
+    override fun navigateToDetailScreen(placeId: Int) = TODO("Not yet implemented")
 }

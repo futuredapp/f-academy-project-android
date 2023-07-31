@@ -21,16 +21,12 @@ sealed class Destination(
     val deepLinks: List<NavDeepLink> = emptyList(),
 ) {
     object Home : Destination(route = "home")
+
     object Detail : Destination(
-        route = "detail/{$PLACE_ID}",
-        arguments = listOf(
-            navArgument(PLACE_ID) {
-                type = NavType.IntType
-            },
-        ),
+        route = "detail",
+        arguments = emptyList(),
     ) {
-        fun buildRoute(placeId: Int): String = route
-            .withArgument(PLACE_ID, placeId.toString())
+        fun buildRoute(): String = route
     }
 }
 

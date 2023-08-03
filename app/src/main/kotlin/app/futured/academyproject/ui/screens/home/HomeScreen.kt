@@ -32,6 +32,7 @@ import app.futured.academyproject.tools.arch.EventsEffect
 import app.futured.academyproject.tools.arch.onEvent
 import app.futured.academyproject.tools.compose.ScreenPreviews
 import app.futured.academyproject.tools.preview.PlacesProvider
+import app.futured.academyproject.ui.components.PlaceCard
 import app.futured.academyproject.ui.components.Showcase
 import app.futured.academyproject.ui.theme.Grid
 import kotlinx.collections.immutable.PersistentList
@@ -44,7 +45,7 @@ fun HomeScreen(
     with(viewModel) {
         EventsEffect {
             onEvent<NavigateToDetailEvent> {
-                // TODO: COMPOSE NAVIGATION
+                navigation.navigateToDetailScreen(placeId = it.placeId)
             }
         }
 
@@ -85,7 +86,12 @@ object Home {
                     modifier = Modifier
                         .fillMaxSize(),
                 ) {
-                    // TODO: COMPOSE UI
+                    items(places) { place ->
+                        PlaceCard(
+                            place = place,
+                            onClick = actions::navigateToDetailScreen,
+                        )
+                    }
                 }
             },
         )

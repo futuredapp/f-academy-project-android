@@ -17,6 +17,6 @@ class NavigationDestinationsImpl(private val navController: NavController) : Nav
     }
 
     override fun navigateToDetailScreen(placeId: Int) {
-        // TODO: COMPOSE NAVIGATION
+        navController.navigate(Destination.Detail.buildRoute(placeId))
     }
 }

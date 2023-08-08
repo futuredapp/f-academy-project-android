@@ -89,7 +89,9 @@ object Home {
                     items(places) { place ->
                         PlaceCard(
                             place = place,
-                            onClick = actions::navigateToDetailScreen,
+                            onClick = { placeId ->
+                                actions.navigateToDetailScreen(placeId)
+                            },
                         )
                     }
                 }

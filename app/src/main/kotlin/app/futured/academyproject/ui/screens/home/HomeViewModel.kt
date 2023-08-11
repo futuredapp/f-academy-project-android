@@ -17,6 +17,8 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadCulturalPlaces() {
+        viewState.error = null
+
         getCulturalPlacesUseCase.execute {
             onSuccess {
                 Timber.d("Cultural places: $it")
@@ -26,10 +28,15 @@ class HomeViewModel @Inject constructor(
                     addAll(it)
                 }
             }
-            onError {
-                Timber.e(it)
+            onError { error ->
+                Timber.e(error)
+                viewState.error = error
             }
         }
+    }
+
+    override fun tryAgain() {
+        loadCulturalPlaces()
     }
 
     override fun navigateToDetailScreen(placeId: Int) {

@@ -1,12 +1,17 @@
 package app.futured.academyproject.ui.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -14,6 +19,7 @@ import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.surfaceColorAtElevation
@@ -22,8 +28,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import app.futured.academyproject.R
 import app.futured.academyproject.data.model.local.Place
@@ -36,6 +44,7 @@ import app.futured.academyproject.ui.components.PlaceCard
 import app.futured.academyproject.ui.components.Showcase
 import app.futured.academyproject.ui.theme.Grid
 import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun HomeScreen(
@@ -52,6 +61,7 @@ fun HomeScreen(
         Home.Content(
             viewModel,
             viewState.places,
+            viewState.error,
         )
     }
 }
@@ -59,7 +69,10 @@ fun HomeScreen(
 object Home {
 
     interface Actions {
+
         fun navigateToDetailScreen(placeId: Int) = Unit
+
+        fun tryAgain() = Unit
     }
 
     object PreviewActions : Actions
@@ -69,6 +82,7 @@ object Home {
     fun Content(
         actions: Actions,
         places: PersistentList<Place>,
+        error: Throwable?,
         modifier: Modifier = Modifier,
     ) {
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -79,18 +93,28 @@ object Home {
                 HomeTopAppBar(scrollBehavior)
             },
             content = { innerPadding ->
-                LazyColumn(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = innerPadding,
-                    verticalArrangement = Arrangement.spacedBy(Grid.d1),
-                    modifier = Modifier
-                        .fillMaxSize(),
-                ) {
-                    items(places) { place ->
-                        PlaceCard(
-                            place = place,
-                            onClick = actions::navigateToDetailScreen,
-                        )
+                when {
+                    error != null -> {
+                        Error(onTryAgain = actions::tryAgain)
+                    }
+                    places.isEmpty() -> {
+                        Loading()
+                    }
+                    places.isNotEmpty() -> {
+                        LazyColumn(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            contentPadding = innerPadding,
+                            verticalArrangement = Arrangement.spacedBy(Grid.d1),
+                            modifier = Modifier
+                                .fillMaxSize(),
+                        ) {
+                            items(places) { place ->
+                                PlaceCard(
+                                    place = place,
+                                    onClick = actions::navigateToDetailScreen,
+                                )
+                            }
+                        }
                     }
                 }
             },
@@ -131,6 +155,53 @@ object Home {
             scrollBehavior = scrollBehavior,
         )
     }
+
+    @Composable
+    private fun Loading() {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+
+    @Composable
+    private fun Error(
+        onTryAgain: () -> Unit,
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(Grid.d1),
+            ) {
+                Text(
+                    text = "Yups, Error Happened!",
+                    style = MaterialTheme.typography.titleSmall,
+                    textAlign = TextAlign.Center,
+                )
+                Text(
+                    text = "Not our proudest moment. Can you try it again?",
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
+                Button(onClick = onTryAgain) {
+                    Text(
+                        text = "Try again",
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        }
+    }
 }
 
 @ScreenPreviews
@@ -140,6 +211,32 @@ private fun HomeContentPreview(@PreviewParameter(PlacesProvider::class) places: 
         Home.Content(
             Home.PreviewActions,
             places,
+            error = null,
         )
     }
 }
+
+@ScreenPreviews
+@Composable
+private fun HomeContentWithErrorPreview() {
+    Showcase {
+        Home.Content(
+            Home.PreviewActions,
+            places = persistentListOf(),
+            error = IllegalStateException("Test"),
+        )
+    }
+}
+
+@ScreenPreviews
+@Composable
+private fun HomeContentWithLoadingPreview() {
+    Showcase {
+        Home.Content(
+            Home.PreviewActions,
+            places = persistentListOf(),
+            error = null,
+        )
+    }
+}
+

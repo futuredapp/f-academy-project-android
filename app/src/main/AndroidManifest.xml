@@ -3,7 +3,7 @@
     <!-- Zabudnúť pridať internet permission je najviac Android Developer vec na svete!!! -->
     <!-- Ak si sem ale prišiel ešte skôr než si s všimol error v logcate tak klobúk dolu -->
     <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
 
     <application
         android:name=".App"

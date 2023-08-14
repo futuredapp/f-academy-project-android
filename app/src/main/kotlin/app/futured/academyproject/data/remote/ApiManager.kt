@@ -16,11 +16,4 @@ class ApiManager @Inject constructor(
     //  ApiExceptionUnknown. Ako bonus môžeš skúsiť spracova5 rôzne typy errorov. Pre inšpiráciu sa pozri na triedu ApiException
     suspend fun getCulturalPlaces(): CulturalPlaces = TODO("I'll be back... to check your code.")
 
-// RIESENIE
-//    suspend fun getCulturalPlaces(): CulturalPlaces = try {
-//        apiService.culturalPlaces()
-//    } catch (e: Exception) {
-//        throw ApiExceptionUnknown(e.localizedMessage, e)
-//    }
-
 }

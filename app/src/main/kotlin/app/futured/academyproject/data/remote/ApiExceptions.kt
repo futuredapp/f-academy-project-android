@@ -9,18 +9,14 @@ sealed class ApiException(message: String, cause: Throwable?) : Exception(messag
     }
 }
 
-class ApiExceptionParseError(message: String, cause: Throwable?) :
-    ApiException(message, cause)
+class ApiExceptionParseError(message: String, cause: Throwable?) : ApiException(message, cause)
 
-class ApiExceptionConnectionError(message: String, cause: Throwable?) :
-    ApiException(message, cause)
+class ApiExceptionConnectionError(message: String, cause: Throwable?) : ApiException(message, cause)
 
-class ApiExceptionUnAuthorized(message: String, cause: Throwable?) :
-    ApiException(message, cause)
+class ApiExceptionUnAuthorized(message: String, cause: Throwable?) : ApiException(message, cause)
 
-class ApiExceptionForbidden(message: String, cause: Throwable?) :
-    ApiException(message, cause)
+class ApiExceptionForbidden(message: String, cause: Throwable?) : ApiException(message, cause)
 
 class ApiExceptionUnknown(message: String, cause: Throwable?) : ApiException(message, cause)
-class ApiExceptionBadRequest(message: String, cause: Throwable?) :
-    ApiException(message, cause)
+
+class ApiExceptionBadRequest(message: String, cause: Throwable?) : ApiException(message, cause)

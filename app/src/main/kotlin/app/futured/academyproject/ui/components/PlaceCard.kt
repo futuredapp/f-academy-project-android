@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -80,6 +83,14 @@ fun PlaceCard(place: Place, onClick: (Int) -> Unit, modifier: Modifier = Modifie
                 overflow = TextOverflow.Ellipsis,
             )
         }
+        if (place.isFavourite) {
+
+            Icon(
+                imageVector = Icons.Filled.Favorite,
+                tint = MaterialTheme.colorScheme.error,
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -87,4 +98,10 @@ fun PlaceCard(place: Place, onClick: (Int) -> Unit, modifier: Modifier = Modifie
 @Composable
 private fun PlaceCardPreview(@PreviewParameter(PlacesProvider::class) places: PersistentList<Place>) = Showcase {
     PlaceCard(place = places.first(), onClick = {})
+}
+
+@Preview
+@Composable
+private fun PlaceCardPreview2(@PreviewParameter(PlacesProvider::class) places: PersistentList<Place>) = Showcase {
+    PlaceCard(place = places.first().copy(isFavourite = true), onClick = {})
 }

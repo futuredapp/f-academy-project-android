@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -44,10 +47,14 @@ fun DetailScreen(
 object Detail {
 
     interface Actions {
-        fun navigateBack() = Unit
+        fun navigateBack()
+        fun markAsFavourite()
     }
 
-    object PreviewActions : Actions
+    object PreviewActions : Actions {
+        override fun navigateBack() {}
+        override fun markAsFavourite() {}
+    }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -60,6 +67,21 @@ object Detail {
             topBar = {
                 TopAppBar(
                     title = { Text(text = "DetailScreen") },
+                    actions = {
+                        val (iconRes, iconColor) = if (place?.isFavourite == true) {
+                            Icons.Filled.Favorite to MaterialTheme.colorScheme.error
+                        } else {
+                            Icons.Filled.FavoriteBorder to MaterialTheme.colorScheme.onSurface
+                        }
+
+                        IconButton(onClick = actions::markAsFavourite) {
+                            Icon(
+                                imageVector = iconRes,
+                                tint = iconColor,
+                                contentDescription = null,
+                            )
+                        }
+                    },
                     navigationIcon = {
                         IconButton(onClick = { actions.navigateBack() }) {
                             Icon(Icons.Filled.ArrowBack, contentDescription = null)

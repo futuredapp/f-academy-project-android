@@ -30,6 +30,7 @@ class PlacesProvider : PreviewParameterProvider<PersistentList<Place>> {
             ),
             Place(
                 id = 17521,
+                isFavourite = true,
                 longitude = 16.626557231100332,
                 latitude = 49.18430405492898,
                 name = "Artikle",

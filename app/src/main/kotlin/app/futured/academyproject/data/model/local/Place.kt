@@ -2,6 +2,7 @@ package app.futured.academyproject.data.model.local
 
 data class Place(
     val id: Int,
+    val isFavourite: Boolean = false,
     val longitude: Double? = null,
     val latitude: Double? = null,
     val name: String,

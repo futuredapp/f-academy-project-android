@@ -33,7 +33,7 @@ class DetailViewModel @Inject constructor(
         sendEvent(NavigateBackEvent)
     }
 
-    override fun markAsFavourite() {
+    override fun onFavorite() {
         setFavoritePlaceUseCase.execute(SetFavoritePlaceUseCase.Args(viewState.placeId)) {
             onSuccess {}
         }

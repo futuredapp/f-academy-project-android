@@ -1,7 +1,5 @@
 package app.futured.academyproject.data.persistence
 
-import android.content.Context
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,23 +28,23 @@ class PlacesPersistence @Inject constructor(
     }
 
     fun addPlaceId(placeId: Int): Boolean {
-        val savedTileIds = getPlaceIds().toMutableList()
+        val savedPlaceIds = getPlaceIds().toMutableList()
 
-        return if (placeId in savedTileIds) {
+        return if (placeId in savedPlaceIds) {
             false
         } else {
-            setPlaceIds(savedTileIds.apply { add(placeId) })
+            setPlaceIds(savedPlaceIds.apply { add(placeId) })
             true
         }
     }
 
     fun removePlaceId(placeId: Int): Boolean {
-        val savedTileIds = getPlaceIds().toMutableList()
+        val savedPlaceIds = getPlaceIds().toMutableList()
 
-        return if (placeId !in savedTileIds) {
+        return if (placeId !in savedPlaceIds) {
             false
         } else {
-            setPlaceIds(savedTileIds.apply { remove(placeId) })
+            setPlaceIds(savedPlaceIds.apply { remove(placeId) })
             true
         }
     }

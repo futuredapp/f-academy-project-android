@@ -48,12 +48,12 @@ object Detail {
 
     interface Actions {
         fun navigateBack()
-        fun markAsFavourite()
+        fun onFavorite()
     }
 
     object PreviewActions : Actions {
         override fun navigateBack() {}
-        override fun markAsFavourite() {}
+        override fun onFavorite() {}
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -74,7 +74,7 @@ object Detail {
                             Icons.Filled.FavoriteBorder to MaterialTheme.colorScheme.onSurface
                         }
 
-                        IconButton(onClick = actions::markAsFavourite) {
+                        IconButton(onClick = actions::onFavorite) {
                             Icon(
                                 imageVector = iconRes,
                                 tint = iconColor,

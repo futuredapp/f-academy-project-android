@@ -1,5 +1,6 @@
 package app.futured.academyproject.ui.screens.home
 
+import android.location.Location
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,4 +17,6 @@ class HomeViewState @Inject constructor() : ViewState {
     var places: PersistentList<Place> by mutableStateOf(persistentListOf())
 
     var error: Throwable? by mutableStateOf(null)
+
+    var location: Location? by mutableStateOf(null)
 }

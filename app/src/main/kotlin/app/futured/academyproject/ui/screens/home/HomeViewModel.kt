@@ -1,5 +1,6 @@
 package app.futured.academyproject.ui.screens.home
 
+import app.futured.academyproject.domain.GetLastLocationUseCase
 import app.futured.academyproject.domain.GetPlacesFlowUseCase
 import app.futured.academyproject.tools.arch.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,16 +12,13 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     override val viewState: HomeViewState,
     private val getPlacesFlowUseCase: GetPlacesFlowUseCase,
+    private val getLastLocationUseCase: GetLastLocationUseCase,
 ) : BaseViewModel<HomeViewState>(), Home.Actions {
 
-    init {
-        loadCulturalPlaces()
-    }
-
-    private fun loadCulturalPlaces() {
+    override fun loadCulturalPlaces() {
         viewState.error = null
 
-        getPlacesFlowUseCase.execute {
+        getPlacesFlowUseCase.execute(viewState.location) {
             onNext {
                 Timber.d("Cultural places: $it")
 
@@ -39,5 +37,19 @@ class HomeViewModel @Inject constructor(
 
     override fun navigateToDetailScreen(placeId: Int) {
         sendEvent(NavigateToDetailEvent(placeId))
+    }
+
+    override fun onAllowedLocationPermission() {
+        getLastLocationUseCase.execute {
+            onSuccess {
+                viewState.location = it
+                loadCulturalPlaces()
+            }
+
+            onError {
+                Timber.e(it)
+            }
+        }
+        Timber.d("Location permission allowed")
     }
 }

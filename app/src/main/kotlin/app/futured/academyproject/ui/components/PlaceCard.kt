@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import app.futured.academyproject.data.model.local.Place
+import app.futured.academyproject.tools.extensions.formatMetersToDistanceString
 import app.futured.academyproject.tools.preview.PlacesProvider
 import app.futured.academyproject.ui.theme.Grid
 import coil.compose.rememberAsyncImagePainter
@@ -75,20 +77,33 @@ fun PlaceCard(place: Place, onClick: (Int) -> Unit, modifier: Modifier = Modifie
                 overflow = TextOverflow.Ellipsis,
             )
             Spacer(modifier = Modifier.height(Grid.d1))
-            Text(
-                text = place.type,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+            Row {
+                Text(
+                    text = place.type,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+
+                if (place.distance != null) {
+                    Spacer(modifier = Modifier.width(Grid.d1))
+                    Text(
+                        text = place.distance.formatMetersToDistanceString(),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
         }
         if (place.isFavourite) {
 
             Icon(
                 imageVector = Icons.Filled.Favorite,
                 tint = MaterialTheme.colorScheme.error,
-                contentDescription = null
+                contentDescription = null,
             )
         }
     }

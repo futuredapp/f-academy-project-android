@@ -1,5 +1,6 @@
 package app.futured.academyproject.data.model.api
 
+import android.location.Location
 import app.futured.academyproject.data.model.local.Place
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,7 +13,7 @@ data class Feature(
     @SerialName("properties") val properties: Properties,
 )
 
-fun Feature.mapToPlace(isFavourite: Boolean) = Place(
+fun Feature.mapToPlace(isFavourite: Boolean, location: Location? = null) = Place(
     id = properties.ogcFid,
     isFavourite = isFavourite,
     name = properties.name,
@@ -33,4 +34,15 @@ fun Feature.mapToPlace(isFavourite: Boolean) = Place(
     openFrom = properties.openFrom,
     openTo = properties.openTo,
     image1Url = properties.image1Url,
+    distance = location?.let {
+        val results = FloatArray(1)
+        Location.distanceBetween(
+            it.latitude,
+            it.longitude,
+            geometry?.coordinates?.getOrNull(1) ?: 0.0,
+            geometry?.coordinates?.getOrNull(0) ?: 0.0,
+            results,
+        )
+        results[0]
+    },
 )

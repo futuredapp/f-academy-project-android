@@ -1,5 +1,10 @@
 package app.futured.academyproject.ui.screens.home
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +17,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
@@ -22,14 +28,17 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import app.futured.academyproject.R
 import app.futured.academyproject.data.model.local.Place
@@ -43,6 +52,7 @@ import app.futured.academyproject.ui.components.Showcase
 import app.futured.academyproject.ui.theme.Grid
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
+import timber.log.Timber
 
 @Composable
 fun HomeScreen(
@@ -55,7 +65,12 @@ fun HomeScreen(
                 navigation.navigateToDetailScreen(placeId = it.placeId)
             }
         }
-
+        RememberLocationPermissionState(
+            onGrant = viewModel::onAllowedLocationPermission,
+            onDeny = {
+                viewModel.loadCulturalPlaces()
+            },
+        )
         Home.Content(
             viewModel,
             viewState.places,
@@ -71,6 +86,10 @@ object Home {
         fun navigateToDetailScreen(placeId: Int) = Unit
 
         fun tryAgain() = Unit
+
+        fun onAllowedLocationPermission() = Unit
+
+        fun loadCulturalPlaces() = Unit
     }
 
     object PreviewActions : Actions
@@ -95,9 +114,11 @@ object Home {
                     error != null -> {
                         Error(onTryAgain = actions::tryAgain)
                     }
+
                     places.isEmpty() -> {
                         Loading()
                     }
+
                     places.isNotEmpty() -> {
                         LazyColumn(
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -230,3 +251,18 @@ private fun HomeContentWithLoadingPreview() {
     }
 }
 
+@Composable
+private fun RememberLocationPermissionState(
+    onGrant: () -> Unit,
+    onDeny: () -> Unit,
+) {
+    onDeny()
+    // TODO 2: Create a rememberLauncherForActivityResult for RequestMultiplePermissions
+
+    // TODO 3: Create a LocalContext.current
+
+    //TODO 4: Create a LaunchedEffect with permission check
+    // - Check if all permissions are granted
+    // - If yes, call onGrant()
+    // - If no, launch the launcherMultiplePermissions
+}

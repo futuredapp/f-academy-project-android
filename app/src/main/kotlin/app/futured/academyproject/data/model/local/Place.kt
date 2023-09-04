@@ -20,4 +20,5 @@ data class Place(
     val openFrom: String? = null,
     val openTo: String? = null,
     val image1Url: String? = null,
+    val distance: Float? = null,
 )
